@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Рейтинг</title>
+    <link rel="stylesheet" href="Reyt.css">
+    
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <a href="#" class="logo">Logo</a>
+            
+            <button class="mobile-menu-btn" id="mobile-menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html">Основна сторінка</a></li>
+                <li><a href="rating.html" class="active">Рейтинг</a></li>
+                <li><a href="profile.html">Особисті дані</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main class="main-content">
+        <section class="content-card">
+            <div class="rating-header">
+                <h1>Рейтинг класу</h1>
+                <div class="custom-select-wrapper">
+                    <select id="aspect-select" class="custom-select">
+                        <option value="total">Загальний бал</option>
+                        <option value="socialEvents">Соціальні івенти</option>
+                        <option value="duty">Чергування</option>
+                        <option value="events">Події</option>
+                        <option value="remarks">Зауваження</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="rating-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>ПІБ учня</th>
+                            <th id="score-column-header">Загальний бал</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rating-tbody">
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>

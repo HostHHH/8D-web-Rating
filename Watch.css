@@ -1,0 +1,123 @@
+.schedule-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.schedule-header h2 {
+    font-size: 2rem;
+    color: var(--text-main);
+}
+
+.schedule-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--surface-color);
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+}
+
+.btn-primary:disabled {
+    background-color: var(--text-muted);
+    cursor: not-allowed;
+    transform: none;
+}
+
+.week-label {
+    font-weight: 700;
+    color: var(--text-main);
+    min-width: 200px;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.schedule-table th,
+.schedule-table td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.schedule-table th {
+    font-weight: 600;
+    color: var(--text-muted);
+    background-color: var(--bg-color);
+}
+
+.schedule-table tbody tr {
+    transition: background-color 0.2s;
+}
+
+.schedule-table tbody tr:hover {
+    background-color: var(--bg-color);
+}
+
+.today-row {
+    background-color: #f0fdf4 !important;
+}
+
+.badge {
+    padding: 0.35rem 0.85rem;
+    border-radius: 9999px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    display: inline-block;
+}
+
+.badge.active {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+.badge.upcoming {
+    background-color: #e0f2fe;
+    color: #075985;
+}
+
+.badge.completed {
+    background-color: #f1f5f9;
+    color: #475569;
+}
+
+@media (max-width: 768px) {
+    .schedule-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .schedule-controls {
+        justify-content: space-between;
+    }
+
+    .week-label {
+        font-size: 1rem;
+        min-width: auto;
+    }
+}

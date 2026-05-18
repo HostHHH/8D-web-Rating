@@ -107,13 +107,8 @@ body {
 }
 
 .content-card p {
-    margin-bottom: 1.25rem;
     color: var(--text-muted);
     font-size: 1.1rem;
-}
-
-.content-card p:last-child {
-    margin-bottom: 0;
 }
 
 @media (max-width: 768px) {
@@ -136,7 +131,7 @@ body {
     }
 
     .nav-links.open {
-        max-height: 200px; 
+        max-height: 250px;
     }
 
     .nav-links li {

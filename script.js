@@ -315,22 +315,22 @@ document.addEventListener('DOMContentLoaded', () => {
             nextWeekBtn.disabled = weekIndex === weeks.length - 1;
         };
 
-        const fetchSchedule = async () => {
-            try {
-                const response = await fetch('http://127.0.0.1:5000/api/schedule');
-                if (response.ok) {
-                    const data = await response.json();
-                    weeks = processScheduleData(data);
-                    if (weeks.length > 0) {
-                        renderSchedule(currentWeekIndex);
-                    }
-                } else {
-                    scheduleTbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:#e11d48;">Помилка: не вдалося завантажити дані з сервера</td></tr>';
-                }
-            } catch (error) {
-                scheduleTbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:#e11d48;">Немає з\'єднання з сервером. Переконайтеся, що Python бекенд запущено.</td></tr>';
+const fetchSchedule = async () => {
+    try {
+        const response = await fetch('http://93.183.216.149:5000/api/schedule');
+        if (response.ok) {
+            const data = await response.json();
+            weeks = processScheduleData(data);
+            if (weeks.length > 0) {
+                renderSchedule(currentWeekIndex);
             }
-        };
+        } else {
+            scheduleTbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:#e11d48;">Помилка: не вдалося завантажити дані з сервера</td></tr>';
+        }
+    } catch (error) {
+        scheduleTbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:#e11d48;">Немає з\'єднання з сервером. Переконайтеся, що Python бекенд запущено.</td></tr>';
+    }
+};
 
         fetchSchedule();
 

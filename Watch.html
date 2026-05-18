@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Чергування</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="Watch.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <a href="index.html" class="logo">Class Hub</a>
+            <button class="mobile-menu-btn" id="mobile-menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html">Головна</a></li>
+                <li><a href="Reyt.html">Рейтинг</a></li>
+                <li><a href="profile.html">Особисті дані</a></li>
+                <li><a href="Watch.html" class="active">Чергування</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="main-content">
+        <section class="content-card">
+            <div class="schedule-header">
+                <h2>Графік чергувань</h2>
+                <div class="schedule-controls">
+                    <button class="btn-primary" id="prev-week">◀ Попередній тиждень</button>
+                    <span id="current-week-label" class="week-label"></span>
+                    <button class="btn-primary" id="next-week">Наступний тиждень ▶</button>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>Дата</th>
+                            <th>День тижня</th>
+                            <th>Черговий 1</th>
+                            <th>Черговий 2</th>
+                            <th>Статус</th>
+                        </tr>
+                    </thead>
+                    <tbody id="schedule-tbody">
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>

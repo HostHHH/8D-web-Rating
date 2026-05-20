@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Відвідуваність - Class Hub</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+        }
+
+        .header {
+            background-color: #ffffff;
+            padding: 15px 40px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            display: flex;
+            justify-content: center;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #8da4c4;
+            text-decoration: none;
+            user-select: none;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #6c757d;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #8da4c4;
+        }
+
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .content-card {
+            background: #ffffff;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 1200px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .header-section h2 {
+            margin: 0;
+            color: #2b3a4a;
+            font-size: 1.8rem;
+        }
+
+        .stats {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #6c757d;
+        }
+
+        .students-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 15px;
+        }
+
+        .student-card {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .student-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+
+        .student-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #495057;
+            margin-bottom: 8px;
+        }
+
+        .status-indicator {
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+        }
+
+        .student-card.present {
+            border-color: #d1e7dd;
+            background-color: rgba(209, 231, 221, 0.3);
+        }
+
+        .student-card.present .status-indicator {
+            background-color: #d1e7dd;
+            color: #0f5132;
+        }
+
+        .student-card.absent {
+            border-color: #f8d7da;
+            background-color: rgba(248, 215, 218, 0.3);
+        }
+
+        .student-card.absent .status-indicator {
+            background-color: #f8d7da;
+            color: #842029;
+        }
+
+        body.admin-mode .student-card {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <a class="logo" id="secret-trigger">Class Hub</a>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html">Головна</a></li>
+                <li><a href="Reyt.html">Рейтинг</a></li>
+                <li><a href="profile.html">Особисті дані</a></li>
+                <li><a href="Watch.html">Чергування</a></li>
+                <li><a href="alove.html" class="active">Відвідуваність</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main class="main-content">
+        <section class="content-card">
+            <div class="header-section">
+                <h2>Облік відвідуваності</h2>
+                <div class="stats" id="stats-counter">Присутні: 0 / 39</div>
+            </div>
+            <div class="students-grid" id="students-grid">
+            </div>
+        </section>
+    </main>
+
+    <script type="module" src="alove.js"></script>
+</body>
+</html>

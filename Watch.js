@@ -19,7 +19,8 @@ const db = getDatabase(app);
 const provider = new GoogleAuthProvider();
 
 const adminEmails = [
-    "tviy.email@gmail.com"
+    "solomianech@gmail.com",
+    "orestmatsevych@gmail.com"
 ];
 
 const studentPairs = [

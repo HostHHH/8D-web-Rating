@@ -77,6 +77,8 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
         .header-section h2 {
@@ -85,10 +87,45 @@
             font-size: 1.8rem;
         }
 
+        .stats-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
         .stats {
             font-size: 1.1rem;
             font-weight: 600;
             color: #6c757d;
+        }
+
+        .action-btn {
+            background-color: #8da4c4;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .action-btn:hover {
+            background-color: #7a93b5;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            transform: translateY(-1px);
+        }
+
+        .action-btn:active {
+            transform: translateY(1px);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        body.admin-mode .action-btn {
+            display: inline-block;
         }
 
         .students-grid {
@@ -108,13 +145,8 @@
             justify-content: center;
             text-align: center;
             transition: all 0.2s ease;
-            cursor: pointer;
+            cursor: default;
             user-select: none;
-        }
-
-        .student-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
         }
 
         .student-name {
@@ -155,6 +187,11 @@
         body.admin-mode .student-card {
             cursor: pointer;
         }
+
+        body.admin-mode .student-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
     </style>
 </head>
 <body>
@@ -175,7 +212,10 @@
         <section class="content-card">
             <div class="header-section">
                 <h2>Облік відвідуваності</h2>
-                <div class="stats" id="stats-counter">Присутні: 0 / 39</div>
+                <div class="stats-container">
+                    <div class="stats" id="stats-counter">Присутні: 0 / 39</div>
+                    <button id="send-report-btn" class="action-btn">Підтвердити зміну</button>
+                </div>
             </div>
             <div class="students-grid" id="students-grid">
             </div>

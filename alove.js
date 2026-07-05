@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+import { getDatabase, ref, set, onValue, push } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyC8n5mXbBMPk4GuUv-aO8CJnSXFBQA8ous",
@@ -39,7 +39,6 @@ const studentsList = [
 let attendanceData = {};
 let isAdmin = false;
 
-// Отримуємо сьогоднішню дату у форматі YYYY-MM-DD
 function getTodayKey() {
     const today = new Date();
     const year = today.getFullYear();
@@ -58,7 +57,6 @@ function renderStudents() {
     let presentCount = 0;
 
     studentsList.forEach((name, index) => {
-        // Якщо даних немає або вони не 'false', учень вважається присутнім
         const isPresent = attendanceData[index] !== false;
         if (isPresent) presentCount++;
 
@@ -77,7 +75,6 @@ function renderStudents() {
     statsCounter.textContent = `Присутні: ${presentCount} / ${studentsList.length}`;
 }
 
-// Авторизація через подвійний клік на логотип
 async function handleAdminAccess() {
     const user = auth.currentUser;
     if (user) {
@@ -89,9 +86,7 @@ async function handleAdminAccess() {
     } else {
         try {
             const result = await signInWithPopup(auth, provider);
-            if (adminEmails.includes(result.user.email)) {
-                alert("Немає доступу");
-            } else {
+            if (!adminEmails.includes(result.user.email)) {
                 alert("Доступ заборонено: ваш акаунт не має прав адміністратора.");
             }
         } catch (error) {
@@ -105,7 +100,6 @@ document.getElementById("secret-trigger").addEventListener("dblclick", (e) => {
     handleAdminAccess();
 });
 
-// Обробка кліку по учню
 async function handleStudentClick(index) {
     if (!isAdmin) {
         alert("Немає доступу");
@@ -114,7 +108,6 @@ async function handleStudentClick(index) {
 
     const isPresent = attendanceData[index] !== false;
     try {
-        // Зберігаємо поточний стан (true - присутній, false - відсутній) у гілку сьогоднішнього дня
         await set(ref(db, `attendance/${todayKey}/${index}`), !isPresent);
     } catch (error) {
         alert("Помилка збереження даних: " + error.message);
@@ -138,7 +131,6 @@ onAuthStateChanged(auth, (user) => {
     }
 });
 
-// Таймер для автоматичного оновлення сторінки рівно о 00:00
 function setupMidnightRefresh() {
     const now = new Date();
     const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0, 0);
@@ -149,8 +141,31 @@ function setupMidnightRefresh() {
     }, msUntilMidnight);
 }
 
+async function sendAbsenteesReport() {
+    if (!isAdmin) {
+        alert("Немає доступу для відправки звіту");
+        return;
+    }
+
+    const absentees = studentsList.filter((name, index) => attendanceData[index] === false);
+    
+    const reportData = {
+        date: todayKey,
+        timestamp: Date.now(),
+        absentees: absentees,
+        status: "pending"
+    };
+
+    try {
+        const reportsRef = ref(db, `reports_queue`);
+        await push(reportsRef, reportData);
+        alert("Список відсутніх успішно відправлено!");
+    } catch (error) {
+        alert("Помилка відправки звіту: " + error.message);
+    }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
-    // Завантажуємо відвідуваність ТІЛЬКИ для поточної дати
     const attendanceRef = ref(db, `attendance/${todayKey}`);
     onValue(attendanceRef, (snapshot) => {
         attendanceData = snapshot.val() || {};
@@ -158,4 +173,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     setupMidnightRefresh();
+
+    const sendBtn = document.getElementById("send-report-btn");
+    if (sendBtn) {
+        sendBtn.addEventListener("click", sendAbsenteesReport);
+    }
 });
